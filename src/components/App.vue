@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import CabeceraComponent from "./components/shared/CabeceraComponent.vue";
-import PiePaginaComponent from "./components/shared/PiePaginaComponent.vue";
+import CabeceraComponent from "./shared/CabeceraComponent.vue";
+import PiePaginaComponent from "./shared/PiePaginaComponent.vue";
 
 export default {
     name: "App",
@@ -50,7 +50,7 @@ body {
     }
 
     main {
-        padding: 50px 0;
+        padding: 150px 0;
     }
 }
 

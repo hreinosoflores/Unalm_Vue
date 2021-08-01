@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-navbar toggleable="lg" variant="white">
+        <b-navbar toggleable="lg" variant="white" fixed="top">
             <b-navbar-brand class="text-secondary text-break" id="titulo">
                 <router-link to="/" title="Home">
                     <img src="../../assets/unalm-logo.png" alt="unalm logo" />
