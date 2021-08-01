@@ -4,7 +4,7 @@
 
         <hr />
 
-        <b-button-group class="d-flex justify-content-between">
+        <b-button-group class="d-flex">
             <b-button variant="primary" :to="{ name: 'curso-save', params: { id: curso.id } }">Editar Información</b-button>
             <b-button variant="danger">Eliminar Curso</b-button>
         </b-button-group>
