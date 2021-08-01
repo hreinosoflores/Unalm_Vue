@@ -98,18 +98,17 @@ export default {
         };
     },
     methods: {
-        submit(event) {
-            event.preventDefault();
+        getCurso(id) {
+            axios.get(Global.url + Global.urlCursos + id).then((res) => {
+                if (res.status == 200 || res.status == 201) {
+                    this.curso = res.data;
+                } else {
+                    console.log(res.status);
+                }
+            });
+        },
 
-            let config = {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
-
-            this.curso.createdAt = new Date();
-            this.curso.updatedAt = new Date();
-
+        addCurso(config) {
             axios
                 .post(Global.url + Global.urlCursos, this.curso, config)
                 .then((res) => {
@@ -125,6 +124,50 @@ export default {
                     console.log(exception);
                 });
         },
+
+        updateCurso(id, config) {
+            axios
+                .put(Global.url + Global.urlCursos + id, this.curso, config)
+                .then((res) => {
+                    if (res.status == 200 || res.status == 201) {
+                        document.saveForm.reset();
+                        console.log(res.data);
+                        this.$router.push("/");
+                    } else {
+                        console.log(res.status);
+                    }
+                })
+                .catch((exception) => {
+                    console.log(exception);
+                });
+        },
+
+        submit(event) {
+            event.preventDefault();
+
+            let config = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+
+            var id = this.$route.params.id;
+
+            if (id != 0) {
+                this.curso.updatedAt = new Date();
+                this.updateCurso(id, config);
+            } else {
+                this.curso.createdAt = new Date();
+                this.curso.updatedAt = new Date();
+                this.addCurso(config);
+            }
+        },
+    },
+    mounted() {
+        var id = this.$route.params.id;
+        if (id != 0) {
+            this.getCurso(id);
+        }
     },
 };
 </script>

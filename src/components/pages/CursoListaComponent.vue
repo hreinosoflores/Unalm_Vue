@@ -45,7 +45,13 @@ export default {
         getCursos() {
             axios.get(Global.url + Global.urlCursos).then((res) => {
                 if (res.status == 200 || res.status == 201) {
-                    this.cursos = res.data;
+                    this.cursos = res.data.sort((a, b) => {
+                        let da = new Date(a.updatedAt),
+                            db = new Date(b.updatedAt);
+                        if (da === db) return 0;
+                        if (da > db) return -1;
+                        else return 1;
+                    });
                 } else {
                     console.log(res.status);
                 }
@@ -57,6 +63,6 @@ export default {
     },
     mounted() {
         this.getCursos();
-    }
+    },
 };
 </script>

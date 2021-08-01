@@ -114,7 +114,7 @@ export default {
                 })
                 .catch(exception => {
                     console.log(exception);
-                })
+                });
         }
     }
 };
