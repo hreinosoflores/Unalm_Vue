@@ -119,7 +119,7 @@
                         !$v.mensaje.comentarios.required
                     "
                 >
-                    Apellido obligatorio
+                    Insertar Comentario.
                 </small>
             </b-form-group>
 
@@ -151,15 +151,14 @@ export default {
                 createdAt: undefined,
                 updatedAt: undefined,
             },
-            submitted: false,
         };
     },
     methods: {
         sendMessage() {
-            this.submitted = true;
+ 
             this.$v.$touch();
 
-            console.log('Validado -> ' + this.$v.$invalid);
+            console.log('Invalido? -> ' + this.$v.$invalid);
 
             if (this.$v.$invalid) {
                 return false;
