@@ -99,7 +99,7 @@
                     v-if="
                         $v.curso.creditos.$dirty &&
                         (!$v.curso.creditos.required ||
-                        !$v.curso.creditos.integer)
+                            !$v.curso.creditos.integer)
                     "
                 >
                     Ingresar un numero entero positivo menor de 4 dígitos.
@@ -141,7 +141,7 @@
                     v-if="
                         $v.curso.horasTeoria.$dirty &&
                         (!$v.curso.horasTeoria.required ||
-                        !$v.curso.horasTeoria.integer)
+                            !$v.curso.horasTeoria.integer)
                     "
                 >
                     Ingresar un numero entero positivo menor de 4 dígitos.
@@ -185,7 +185,7 @@
                     v-if="
                         $v.curso.horasPractica.$dirty &&
                         (!$v.curso.horasPractica.required ||
-                        !$v.curso.horasPractica.integer)
+                            !$v.curso.horasPractica.integer)
                     "
                 >
                     Ingresar un numero entero positivo menor de 4 dígitos.
@@ -225,10 +225,7 @@
                 ></b-form-textarea>
                 <small
                     class="text-danger"
-                    v-if="
-                        $v.curso.sumilla.$dirty &&
-                        !$v.curso.sumilla.required
-                    "
+                    v-if="$v.curso.sumilla.$dirty && !$v.curso.sumilla.required"
                 >
                     El curso necesita una breve sumilla.
                 </small>
@@ -237,9 +234,13 @@
             <b-button class="btn-lg btn-block" type="submit" variant="primary">
                 {{ formButton }}
             </b-button>
-            <b-button class="btn-lg btn-block" to="/" variant="outline-primary">
+  
+            <router-link
+                class="btn btn-lg btn-block btn-outline-primary"
+                to="/"
+            >
                 Cancelar
-            </b-button>
+            </router-link>
         </b-form>
     </div>
 </template>
@@ -297,6 +298,7 @@ export default {
                     if (res.status == 200 || res.status == 201) {
                         document.saveForm.reset();
                         console.log(res.data);
+                        alert("El curso fue registrado con éxito.");
                         this.$router.push("/");
                     } else {
                         console.log(res.status);
@@ -314,6 +316,7 @@ export default {
                     if (res.status == 200 || res.status == 201) {
                         document.saveForm.reset();
                         console.log(res.data);
+                        alert("El curso fue modificado con éxito.");
                         this.$router.push("/");
                     } else {
                         console.log(res.status);
@@ -354,10 +357,12 @@ export default {
     mounted() {
         var id = this.$route.params.id;
         if (id != 0) {
-            (this.formTitle = "Editando Curso"),
-                (this.formButton = "Guardar Cambios"),
-                this.getCurso(id);
+            this.formTitle = "Editando Curso";
+            this.formButton = "Guardar Cambios";
+            document.title = Global.title + this.formTitle;
+            this.getCurso(id);
         }
+        document.title = Global.title + this.formTitle;
     },
     validations: {
         curso: {

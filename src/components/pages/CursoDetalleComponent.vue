@@ -4,10 +4,22 @@
 
         <hr />
 
-        <b-button-group class="d-flex">
-            <b-button variant="primary" :to="{ name: 'curso-save', params: { id: curso.id } }">Editar Información</b-button>
-            <b-button variant="danger" v-on:click="deleteCurso(curso.id)">Eliminar Curso</b-button>
-        </b-button-group>
+        <div class="btn-group d-flex">
+            <router-link
+                class="btn btn-primary"
+                :to="{ name: 'curso-save', params: { id: $route.params.id } }"
+            >
+                Editar Información
+            </router-link>
+
+            <button
+                type="button"
+                class="btn btn-danger"
+                v-on:click="deleteCurso(curso.id)"
+            >
+                Eliminar Curso
+            </button>
+        </div>
 
         <br />
 
@@ -35,9 +47,12 @@
         <strong class="text-secondary">Sumilla</strong>
         <p class="text-secondary">{{ curso.sumilla }}</p>
 
-        <b-button class="btn-lg btn-block" to="/" variant="outline-primary">
+        <router-link
+            class="btn btn-lg btn-block btn-outline-primary"
+            :to="{ name: 'curso-save', params: { id: $route.params.id } }"
+        >
             Regresar
-        </b-button>
+        </router-link>
     </div>
 </template>
 
@@ -58,6 +73,7 @@ export default {
             axios.get(Global.url + Global.urlCursos + id).then((res) => {
                 if (res.status == 200 || res.status == 201) {
                     this.curso = res.data;
+                    document.title = Global.title + this.curso.nombre;
                 } else {
                     console.log(res.status);
                 }
@@ -66,15 +82,19 @@ export default {
         formatFecha(date) {
             return FormatFecha(date);
         },
-        deleteCurso(id){
-            axios.delete(Global.url + Global.urlCursos + id).then((res) => {
-                if (res.status == 200 || res.status == 204) {
-                    this.$router.push("/");
-                } else {
-                    console.log(res.status);
-                }
-            });
-        }
+        deleteCurso(id) {
+            var aceptado = window.confirm("¿Desea eliminar este curso?");
+            if (aceptado) {
+                axios.delete(Global.url + Global.urlCursos + id).then((res) => {
+                    if (res.status == 200 || res.status == 204) {
+                        alert("El curso fue eliminado con éxito.");
+                        this.$router.push("/");
+                    } else {
+                        console.log(res.status);
+                    }
+                });
+            }
+        },
     },
     mounted() {
         //recuperamos el parametro pasado mediante la url con $route

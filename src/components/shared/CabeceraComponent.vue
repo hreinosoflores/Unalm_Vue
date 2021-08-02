@@ -11,7 +11,7 @@
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
-                <b-nav pills class="ml-auto">
+                <!-- <b-nav pills class="ml-auto">
                     <b-nav-item
                         to="/"
                         exact-active-class="active"
@@ -30,7 +30,41 @@
                         title="Contáctenos!"
                         >Contacto</b-nav-item
                     >
-                </b-nav>
+                </b-nav> -->
+
+                <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            to="/"
+                            exact
+                            active-class="active"
+                            title="Lista de Cursos"
+                        >
+                            Nuestros Cursos
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            to="/about"
+                            active-class="active"
+                            title="Acerca de nosotros"
+                        >
+                            ¿Quiénes somos?
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            to="/contactenos"
+                            active-class="active"
+                            title="Contáctenos!"
+                        >
+                            Contacto
+                        </router-link>
+                    </li>
+                </ul>
             </b-collapse>
         </b-navbar>
     </div>
@@ -56,6 +90,12 @@ nav {
     img {
         width: 48px;
         margin-right: 10px;
+    }
+
+    .menuActivo {
+        color: #fff !important;
+        font-weight: 700;
+        background-color: #ff0080 !important;
     }
 }
 

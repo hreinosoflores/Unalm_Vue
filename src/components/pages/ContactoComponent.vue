@@ -126,9 +126,13 @@
             <b-button class="btn-lg btn-block" type="submit" variant="primary">
                 Enviar Comentarios
             </b-button>
-            <b-button class="btn-lg btn-block" to="/" variant="outline-primary">
+
+            <router-link
+                class="btn btn-lg btn-block btn-outline-primary"
+                to="/"
+            >
                 Cancelar
-            </b-button>
+            </router-link>
         </b-form>
     </div>
 </template>
@@ -155,10 +159,9 @@ export default {
     },
     methods: {
         sendMessage() {
- 
             this.$v.$touch();
 
-            console.log('Invalido? -> ' + this.$v.$invalid);
+            console.log("Invalido? -> " + this.$v.$invalid);
 
             if (this.$v.$invalid) {
                 return false;
@@ -179,6 +182,7 @@ export default {
                     if (res.status == 200 || res.status == 201) {
                         document.contactForm.reset();
                         console.log(res.data);
+                        alert("Se enviaron los comentarios.");
                         this.$router.push("/");
                     } else {
                         console.log(res.status);
@@ -188,6 +192,9 @@ export default {
                     console.log(exception);
                 });
         },
+    },
+    mounted() {
+        document.title = Global.title + "Contáctenos";
     },
     validations: {
         mensaje: {

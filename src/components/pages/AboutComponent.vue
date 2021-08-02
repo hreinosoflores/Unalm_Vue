@@ -76,7 +76,11 @@
 </template>
 
 <script>
+import { Global } from "../../util/Global";
 export default {
     name: "AboutComponent",
+    mounted(){
+        document.title = Global.title +  '¿Quiénes somos?';
+    }
 };
 </script>
