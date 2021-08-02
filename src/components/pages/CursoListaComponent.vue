@@ -1,15 +1,17 @@
 <template>
     <div>
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="amarillo">Nuestros Cursos</h2>
+            <h1 class="amarillo">Nuestros Cursos</h1>
             <b-button variant="info" to="/curso/save/0">
                 Registrar Nuevo Curso
             </b-button>
         </div>
 
-        <div>
-            <b-list-group v-for="curso in cursos" :key="curso.id">
+        <div v-if="cursos.length > 0">
+            <b-list-group id="lista">
                 <b-list-group-item
+                    v-for="curso in cursosXpagina"
+                    :key="curso.id"
                     class="bg-white border-0 mb-3 shadow-sm rounded"
                     :to="{ name: 'curso-detalle', params: { id: curso.id } }"
                 >
@@ -24,7 +26,20 @@
                     </small>
                 </b-list-group-item>
             </b-list-group>
-            <div id="paginacion"></div>
+            <b-pagination
+                class="text-secondary bg-light shadow-sm p-2"
+                v-model="currentPage"
+                :total-rows="cursos.length"
+                :per-page="perPage"
+                aria-controls="lista"
+                align="center"
+            ></b-pagination>
+        </div>
+
+        <div v-else>
+            <b-list-group-item class="bg-white border-0 mb-3 shadow-sm rounded text-dark">
+                No se han cargado ningun curso en nuestro sistema
+            </b-list-group-item>
         </div>
     </div>
 </template>
@@ -38,7 +53,15 @@ export default {
     name: "CursoListaComponent",
     data() {
         return {
+            perPage: 4,
+            currentPage: 1,
             cursos: [],
+            get cursosXpagina() {
+                return this.cursos.slice(
+                    (this.currentPage - 1) * this.perPage,
+                    this.currentPage * this.perPage
+                );
+            },
         };
     },
     methods: {

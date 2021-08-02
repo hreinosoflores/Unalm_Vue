@@ -1,7 +1,7 @@
 <template>
     <div class="p-4 shadow rounded">
         <div class="text-center">
-            <h2 class="text-center amarillo">¿Quiénes somos?</h2>
+            <h1 class="text-center amarillo">¿Quiénes somos?</h1>
         </div>
         <br />
         <p class="lead text-white">

@@ -1,12 +1,12 @@
 <template>
     <div class="bg-white p-4 shadow rounded">
-        <h2 class="rojo">Detalles del Curso</h2>
+        <h1 class="rojo">Detalles del Curso</h1>
 
         <hr />
 
         <b-button-group class="d-flex">
             <b-button variant="primary" :to="{ name: 'curso-save', params: { id: curso.id } }">Editar Información</b-button>
-            <b-button variant="danger">Eliminar Curso</b-button>
+            <b-button variant="danger" v-on:click="deleteCurso(curso.id)">Eliminar Curso</b-button>
         </b-button-group>
 
         <br />
@@ -66,6 +66,15 @@ export default {
         formatFecha(date) {
             return FormatFecha(date);
         },
+        deleteCurso(id){
+            axios.delete(Global.url + Global.urlCursos + id).then((res) => {
+                if (res.status == 200 || res.status == 204) {
+                    this.$router.push("/");
+                } else {
+                    console.log(res.status);
+                }
+            });
+        }
     },
     mounted() {
         //recuperamos el parametro pasado mediante la url con $route

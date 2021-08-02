@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white p-4 shadow rounded">
         <b-form id="contactForm" name="contactForm" @submit="sendMessage">
-            <h2 class="rojo">Escríbanos para mayor información</h2>
+            <h1 class="rojo">Escríbanos para mayor información</h1>
             <hr />
             <h5>(*) Campos obligatorios</h5>
             <br />

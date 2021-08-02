@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white p-4 shadow rounded">
         <b-form id="saveForm" name="saveForm" @submit="submit">
-            <h2 class="rojo">Save</h2>
+            <h1 class="rojo">{{formTitle}}</h1>
             <hr />
             <h5>(*) Campos obligatorios</h5>
             <br />
@@ -67,7 +67,7 @@
             </b-form-group>
 
             <b-button class="btn-lg btn-block" type="submit" variant="primary">
-                Submit
+                {{formButton}}
             </b-button>
             <b-button class="btn-lg btn-block" to="/" variant="outline-primary">
                 Cancelar
@@ -95,6 +95,8 @@ export default {
                 createdAt: undefined,
                 updatedAt: undefined,
             },
+            formTitle: 'Nuevo Curso',
+            formButton: 'Registrar',
         };
     },
     methods: {
@@ -166,6 +168,8 @@ export default {
     mounted() {
         var id = this.$route.params.id;
         if (id != 0) {
+            this.formTitle= 'Editando Curso',
+            this.formButton= 'Guardar Cambios',
             this.getCurso(id);
         }
     },
